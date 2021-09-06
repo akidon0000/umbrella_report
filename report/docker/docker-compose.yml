@@ -18,20 +18,9 @@ services:
     container_name: umbrella_report
     volumes:
       - ./src:/python/src
-    working_dir: '/root/'
-    # ports:
-    #   - "443:443"
-    #   - "8080:8080"
-    tty: true
-    # links:
-    #   - mysql
-    restart: always
+      - /root/webAPI/logFiles:/python/src/logFiles
+    working_dir: '/python/src'
 
-  # python3:
-  #   restart: always
-  #   build: .
-  #   container_name: 'python3'
-  #   working_dir: '/root/'
-  #   tty: true
-  #   volumes:
-  #     - ./opt:/root/opt
+    tty: true
+
+    restart: always

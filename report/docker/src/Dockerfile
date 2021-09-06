@@ -1,5 +1,5 @@
 FROM python:3
-USER root
+# USER root
 
 RUN apt-get update
 RUN apt-get -y install locales && \
@@ -11,9 +11,15 @@ ENV TZ JST-9
 ENV TERM xterm
 
 RUN apt-get install -y vim less
+
 RUN pip install --upgrade pip
 RUN pip install --upgrade setuptools
 
+
+RUN python -m pip install Flask
 RUN python -m pip install jupyterlab
+RUN python -m pip install python-dotenv
 
+RUN pip install "line_bot_sdk==1.16.0"
 
+RUN pip install schedule
