@@ -1,0 +1,37 @@
+# versionは3系が最新版で、versionによって書き方が異なる
+
+# golang:         コンテナ名
+# build:          **((Dockerfileが存在する場所))**
+# image:          イメージの名前
+# container_name: コンテナの名前
+# volumes:        「./a:/b」 aはホスト側のフォルダを　bのdockerコンテナ側へ
+# ports:          ポート
+# environment:    環境変数
+# tty: true       コンテナ起動永続化
+# links:          他のコンテナの接続
+
+version: '3'
+services:
+  python:
+    build: ./src/
+    image: umbrella_python
+    container_name: umbrella_report
+    volumes:
+      - ./src:/python/src
+    working_dir: '/root/'
+    # ports:
+    #   - "443:443"
+    #   - "8080:8080"
+    tty: true
+    # links:
+    #   - mysql
+    restart: always
+
+  # python3:
+  #   restart: always
+  #   build: .
+  #   container_name: 'python3'
+  #   working_dir: '/root/'
+  #   tty: true
+  #   volumes:
+  #     - ./opt:/root/opt
