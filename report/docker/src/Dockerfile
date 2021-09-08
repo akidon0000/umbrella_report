@@ -23,3 +23,14 @@ RUN python -m pip install python-dotenv
 RUN pip install "line_bot_sdk==1.16.0"
 
 RUN pip install schedule
+
+
+# RUN apt install -y cron
+# COPY cron-example /etc/cron.d/
+# RUN chmod 0644 /etc/cron.d/cron-example
+# CMD ["cron", "-f"]
+
+RUN apt-get install -y cron
+RUN echo '*/1 * * * * root python /python/src/main.py' >> /etc/crontab
+# RUN echo '1 0 * * * root python /python/src/main.py' >> /etc/crontab
+CMD ["cron", "-f"]

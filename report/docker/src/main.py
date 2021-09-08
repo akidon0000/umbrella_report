@@ -44,14 +44,15 @@ def main():
   # schedule.every(2).hours.do(report)
 
   # 毎日0時1分
-  schedule.every().day.at("00:01").do(report)
+  # schedule.every().day.at("00:01").do(report)
 
   # 毎週月曜日
   # schedule.every().monday.do(report)
 
-  while True:
-      schedule.run_pending()
-      time.sleep(30)
+  # while True:
+  #     schedule.run_pending()
+  #     time.sleep(30)
+  report()
 
 
 
@@ -64,6 +65,7 @@ def report():
   successPath = "./logFiles/SuccessLogFiles/" + log_file_name
 
   # Success
+  print(log_file_name)
   if os.path.exists(successPath):
     f = open(successPath, 'r')
     data = f.read()
