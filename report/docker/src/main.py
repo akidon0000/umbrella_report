@@ -51,7 +51,7 @@ def main():
 
   while True:
       schedule.run_pending()
-      time.sleep(1)
+      time.sleep(30)
 
 
 
@@ -60,9 +60,24 @@ def report():
 
   log_file_name = str(datetime.date(dt_now.year, dt_now.month, dt_now.day)) + ".log"
 
-  path = "./logFiles/" + log_file_name
+  errorPath = "./logFiles/ErrorLogFiles/" + log_file_name
+  successPath = "./logFiles/SuccessLogFiles/" + log_file_name
 
-  if os.path.exists(path):
+  # Success
+  if os.path.exists(successPath):
+    f = open(successPath, 'r')
+    data = f.read()
+    f.close()
+
+    successCount = data.count("[Success]")
+    line_bot_api.broadcast(TextSendMessage(text="==本日の稼働状況==\n" + "通信回数：" + str(successCount)))
+
+  else:
+    line_bot_api.broadcast(TextSendMessage(text="==本日の稼働状況==\n" + "通信回数：" + "0"))
+
+
+  # ErrorPath
+  if os.path.exists(errorPath):
     line_bot_api.broadcast(TextSendMessage(text="サーバーにERRORが発生しています"))
 
     f = open(path, 'r')
