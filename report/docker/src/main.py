@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # import logging
 # from multiprocessing import Pool
 # from scheduler.job import JobController
-import schedule
+# import schedule
 import time
 
 from linebot import (
@@ -59,10 +59,10 @@ def main():
 def report():
   dt_now = datetime.datetime.now()
 
-  log_file_name = str(datetime.date(dt_now.year, dt_now.month, dt_now.day)) + ".log"
+  log_file_name = str(datetime.date(dt_now.year, dt_now.month, dt_now.day-1)) + ".log"
 
-  errorPath = "./logFiles/ErrorLogFiles/" + log_file_name
-  successPath = "./logFiles/SuccessLogFiles/" + log_file_name
+  errorPath = "/python/src/logFiles/ErrorLogFiles/" + log_file_name
+  successPath = "/python/src/logFiles/SuccessLogFiles/" + log_file_name
 
   # Success
   print(log_file_name)

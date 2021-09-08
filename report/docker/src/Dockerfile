@@ -22,15 +22,11 @@ RUN python -m pip install python-dotenv
 
 RUN pip install "line_bot_sdk==1.16.0"
 
-RUN pip install schedule
+# RUN pip install schedule
 
 
-# RUN apt install -y cron
-# COPY cron-example /etc/cron.d/
-# RUN chmod 0644 /etc/cron.d/cron-example
-# CMD ["cron", "-f"]
 
+# cronの設定　毎日 0時1分にサーバーの稼働状況をLINEで報告
 RUN apt-get install -y cron
-RUN echo '*/1 * * * * root python /python/src/main.py' >> /etc/crontab
-# RUN echo '1 0 * * * root python /python/src/main.py' >> /etc/crontab
+RUN echo '1 0 * * * root python /python/src/main.py' >> /etc/crontab
 CMD ["cron", "-f"]
