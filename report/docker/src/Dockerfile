@@ -28,5 +28,6 @@ RUN pip install "line_bot_sdk==1.16.0"
 
 # cronの設定　毎日 0時1分にサーバーの稼働状況をLINEで報告
 RUN apt-get install -y cron
-RUN echo '1 0 * * * root python /python/src/main.py' >> /etc/crontab
+RUN echo '5 0 * * * root python /python/src/main.py' >> /etc/crontab
+# RUN echo '*/1 * * * * root python /python/src/main.py' >> /etc/crontab
 CMD ["cron", "-f"]

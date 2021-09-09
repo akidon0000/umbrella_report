@@ -36,7 +36,7 @@ line_bot_api = LineBotApi(LINE_CHANNEL_ACCESS_TOKEN)
 
 
 def main():
-
+  # line_bot_api.broadcast(TextSendMessage(text="メンテナンス"))
   # 10分ごと
   # schedule.every(10).minutes.do(report)
 
@@ -57,15 +57,22 @@ def main():
 
 
 def report():
+
   dt_now = datetime.datetime.now()
 
+
   log_file_name = str(datetime.date(dt_now.year, dt_now.month, dt_now.day-1)) + ".log"
+  print(dt_now)
+  print(log_file_name)
+  line_bot_api.broadcast(TextSendMessage(text=str(dt_now)))
+  line_bot_api.broadcast(TextSendMessage(text=log_file_name))
 
   errorPath = "/python/src/logFiles/ErrorLogFiles/" + log_file_name
   successPath = "/python/src/logFiles/SuccessLogFiles/" + log_file_name
 
+
+
   # Success
-  print(log_file_name)
   if os.path.exists(successPath):
     f = open(successPath, 'r')
     data = f.read()
